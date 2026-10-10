@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APNA AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f5f7ff;font-family:Arial,sans-serif}
+header{padding:22px 18px;border-bottom:1px solid #273047}
+h1{margin:0;color:#7df7bd;font-size:28px}
+header p{color:#aab4ca;margin-bottom:0}
+main{max-width:720px;margin:25px auto;padding:16px}
+.card{background:#151d31;border:1px solid #2b3650;border-radius:18px;padding:18px;margin-bottom:18px}
+h2{font-size:19px;margin-top:0}
+label{display:block;margin:14px 0 8px;color:#d5dced}
+select,textarea,input{width:100%;padding:13px;border:1px solid #384561;border-radius:10px;background:#0d1425;color:white;font-size:16px}
+textarea{min-height:110px;resize:vertical}
+button{border:0;border-radius:10px;background:#7df7bd;color:#07140e;padding:13px 18px;font-weight:bold;font-size:16px;cursor:pointer}
+.note{color:#aab4ca;font-size:14px;line-height:1.6}
+#result{white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere}
+footer{text-align:center;color:#8995ad;padding:20px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>✦ APNA AI</h1>
+<p>Tumhara personal AI workspace</p>
+</header>
+<main>
+<section class="card">
+<h2>💬 AI Chat</h2>
+<label for="question">Tum kya karna chahte ho?</label>
+<textarea id="question" placeholder="Yahan apna prompt likho..."></textarea>
+<button onclick="makePrompt()">Prompt taiyar karo</button>
+<p class="note">Yeh pehla version tumhare ideas ko achhe AI prompts mein badalne ke liye hai. Abhi yeh khud AI model se jawab generate nahi karta.</p>
+</section>
+<section class="card">
+<h2>🎨 Image AI</h2>
+<label for="style">Image ka type</label>
+<select id="style">
+<option>YouTube thumbnail</option>
+<option>2D business illustration</option>
+<option>Cinematic documentary scene</option>
+<option>Realistic image</option>
+</select>
+<label for="idea">Image mein kya dikhana hai?</label>
+<textarea id="idea" placeholder="Jaise: ek Indian chai ki dukaan, subah ka scene..."></textarea>
+<button onclick="imagePrompt()">Image prompt banao</button>
+</section>
+<section class="card">
+<h2>🎬 Video AI</h2>
+<label for="videoIdea">Video scene ka idea</label>
+<textarea id="videoIdea" placeholder="Apne video ka scene likho..."></textarea>
+<button onclick="videoPrompt()">Video prompt banao</button>
+</section>
+<section class="card">
+<h2>📋 Tumhara result</h2>
+<div id="result">Tumhara banaya hua prompt yahan dikhega.</div>
+<br>
+<button onclick="copyResult()">Copy result</button>
+</section>
+<p class="note">APNA AI · Personal workspace · Version 1</p>
+</main>
+<footer>Made for your creativity ❤️</footer>
+<script>
+function show(text){
+document.getElementById('result').textContent=text;
+}
+function makePrompt(){
+const q=document.getElementById('question').value.trim();
+if(!q){show('Pehle apna sawaal likho.');return;}
+show('Is request ka achha jawab do. Zaroorat par simple Hindi use karo. Steps clear rakho.\n\nUser request: '+q);
+}
+function imagePrompt(){
+const idea=document.getElementById('idea').value.trim();
+const style=document.getElementById('style').value;
+if(!idea){show('Pehle image ka idea likho.');return;}
+show('Create a '+style+'. Clear composition, high visual quality, useful details, no watermark. Follow this concept:\n'+idea);
+}
+function videoPrompt(){
+const idea=document.getElementById('videoIdea').value.trim();
+if(!idea){show('Pehle video scene ka idea likho.');return;}
+show('Create a coherent video scene based on this idea. Use natural movement, clear subject, cinematic composition, and avoid unnecessary cuts or text overlays.\n\nScene: '+idea);
+}
+function copyResult(){
+const text=document.getElementById('result').textContent;
+if(navigator.clipboard){
+navigator.clipboard.writeText(text).then(()=>alert('Copied!')).catch(()=>alert('Result ko select karke copy karo.'));
+}else{alert('Result ko select karke copy karo.');}
+}
+</script>
+</body>
+</html>
